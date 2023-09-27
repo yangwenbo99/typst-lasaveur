@@ -6,9 +6,9 @@ FUNCTIONS = {
         '2': 'sqrt',
         }
 FONT_FUNCTIONS = {
-        'b', 'bold',
-        'bb', 'bb',
-        'ca', 'cal',
+        'b': 'bold',
+        'bb': 'bb',
+        'ca': 'cal',
         }
 MAGICS = {
         '6': 'diff',
