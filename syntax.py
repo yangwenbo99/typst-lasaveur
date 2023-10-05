@@ -3,13 +3,13 @@ from gen import *
 
 SUBSCRIPT_LETTERS = '0123456789+-=()aeoxhklmnpst'
 SUBSCRIPT_JOINEDS = '₀₁₂₃₄₅₆₇₈₉₊₋₌₍₎ₐₑₒₓₕₖₗₘₙₚₛₜ'
-SUPERSCRIPT_JOINEDS = '⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼⁽⁾ⁿⁱ'
 SUPERSCRIPT_LETTERS = '0123456789+-=()ni'
+SUPERSCRIPT_JOINEDS = '⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼⁽⁾ⁿⁱ'
 # CAL_LETTERS = '𝒜ℬ𝒞𝒟ℰℱ𝒢ℋℐ𝒥𝒦ℒℳ𝒩𝒪𝒫𝒬ℛ𝒮𝒯𝒰𝒱𝒲𝒳𝒴𝒵'
-CAL_LETTERS = '𝓐𝓑𝓒𝓓𝓔𝓕𝓖𝓗𝓘𝓙𝓚𝓛𝓜𝓝𝓞𝓟𝓠𝓡𝓢𝓣𝓤𝓥𝓦𝓧𝓨𝓩𝓪𝓫𝓬𝓭𝓮𝓯𝓰𝓱𝓲𝓳𝓴𝓵𝓶𝓷𝓸𝓹𝓺𝓻𝓼𝓽𝓾𝓿𝓿𝔀𝔁𝔂𝔃'
-LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+CAL_LETTERS = '𝓐𝓑𝓒𝓓𝓔𝓕𝓖𝓗𝓘𝓙𝓚𝓛𝓜𝓝𝓞𝓟𝓠𝓡𝓢𝓣𝓤𝓥𝓦𝓧𝓨𝓩𝓪𝓫𝓬𝓭𝓮𝓯𝓰𝓱𝓲𝓳𝓴𝓵𝓶𝓷𝓸𝓹𝓺𝓻𝓼𝓽𝓾𝓿𝔀𝔁𝔂𝔃'
+LETTERS     = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+BB_LETTERS         = '𝔸𝔹ℂ𝔻𝔼𝔽𝔾ℍ𝕀𝕁𝕂𝕃𝕄ℕ𝕆ℙℚℝ𝕊𝕋𝕌𝕍𝕎𝕏𝕐ℤ𝕒𝕓𝕔𝕕𝕖𝕗𝕘𝕙𝕚𝕛𝕜𝕝𝕞𝕟𝕠𝕡𝕢𝕣𝕤𝕥𝕦𝕧𝕨𝕩𝕪𝕫𝟘𝟙𝟚𝟛𝟜𝟝𝟞𝟟𝟠𝟡'
 LETTERS_AND_DIGITS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-BB_LETTERS = '𝔸𝔹ℂ𝔻𝔼𝔽𝔾ℍ𝕀𝕁𝕂𝕃𝕄ℕ𝕆ℙℚℝ𝕊𝕋𝕌𝕍𝕎𝕏𝕐ℤ 𝕒𝕓𝕔𝕕𝕖𝕗𝕘𝕙𝕚𝕛𝕜𝕝𝕞𝕟𝕠𝕡𝕢𝕣𝕤𝕥𝕦𝕧𝕨𝕩𝕪𝕫𝟘𝟙𝟚𝟛𝟜𝟝𝟞𝟟𝟠𝟡'
 # also need fb and bold
 
 def parse_args():
@@ -29,9 +29,9 @@ def print_one_line(k: str, v: str):
     k = k.replace(']', '\\]')
     k = k.replace('.', '\\.')
     if "'" in v or "'" in k:
-        print(f"    \ [\"{k}\", \"{v}\"],")
+        print(f"    \\ [\"{k}\", \"{v}\"],")
     else:
-        print(f"    \ ['{k}', '{v}'],")
+        print(f"    \\ ['{k}', '{v}'],")
 
 def main(args: argparse.Namespace):
     SHORT_SYMBOLS = {}
@@ -69,10 +69,10 @@ def main(args: argparse.Namespace):
             v = symbols[kk]
             if len(v) > 1: continue
             print_one_line(k, v)
-    print('\ ]')
+    print('\\ ]')
     print("""
     for typmath in s:typstMathList
-        exe "syn match typstMathSymbol '\\\\zs\\\\<".typmath[0]."\\\\>\\\\ze[^.]' contained conceal cchar=".typmath[1]
+        exe "syn match typstMathSymbol '\\\\(\\\\<\\\\|_\\\\)\\\\zs".typmath[0]."\\\\ze\\\\(\\\\>[^.]\\\\|_\\\\|$\\\\)' contained conceal cchar=".typmath[1]
     endfor
           """)
 
@@ -93,7 +93,7 @@ def main(args: argparse.Namespace):
     for k, v in symbols.items():
         if len(v) > 1: continue
         print_one_line(k, v)
-    print('\ ]')
+    print('\\ ]')
     print("""
     for typmath in s:typstMathList2
         exe "syn match typstMathSymbol '\\\\(^\\\\|\\\\w\\\\|\\\\s\\\\|\\\\$\\\\)\\\\zs".typmath[0]."\\\\ze\\\\(\\\\w\\\\|\\\\s\\\\|$\\\\|\\\\$\\\\)' contained conceal cchar=".typmath[1]
@@ -102,6 +102,27 @@ def main(args: argparse.Namespace):
 
 
     # Scripts
+    print("let s:typstCalList=[")
+    for k, v in zip(LETTERS, CAL_LETTERS):
+        print_one_line(k, v)
+    print('\\ ]')
+    print("""
+    for typmath in s:typstCalList
+        exe "syn match typstMathSymbol '\\\\(\\\\<\\\\|_\\\\)\\\\zscal(".typmath[0].")\\\\ze' contained conceal cchar=".typmath[1]
+        exe "syn match typstMathSymbol '\\\\(\\\\<\\\\|_\\\\)\\\\zsfca(".typmath[0].")\\\\ze' contained conceal cchar=".typmath[1]
+    endfor
+          """)
+
+    print("let s:typstBBList=[")
+    for k, v in zip(LETTERS_AND_DIGITS, BB_LETTERS):
+        print_one_line(k, v)
+    print('\\ ]')
+    print("""
+    for typmath in s:typstBBList
+        exe "syn match typstMathSymbol '\\\\(\\\\<\\\\|_\\\\)\\\\zsbb(".typmath[0].")\\\\ze' contained conceal cchar=".typmath[1]
+        exe "syn match typstMathSymbol '\\\\(\\\\<\\\\|_\\\\)\\\\zsfbb(".typmath[0].")\\\\ze' contained conceal cchar=".typmath[1]
+    endfor
+          """)
 
 
 if __name__ == '__main__':
