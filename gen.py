@@ -78,7 +78,7 @@ GREEKS = {
 COMPATIBILITY = {
         'partial': 'diff',
         'infty': 'infinity',
-        'cric': 'circle.stroked.tiny',
+        'circ': 'circle.stroked.tiny',
         'setminus': 'without',
         'cdot': 'dot.op',
         'bigcup': 'union.big',
@@ -96,6 +96,7 @@ COMPATIBILITY = {
         'iiint': 'integral.triple',
         'oint': 'integral.cont',
         'sim': 'tilde.op',
+        'ne': 'eq.not',
         }
 ARROWS = {
         'l': 'l',
