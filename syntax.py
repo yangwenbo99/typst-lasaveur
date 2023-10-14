@@ -96,12 +96,12 @@ def main(args: argparse.Namespace):
     print('\\ ]')
     print("""
     for typmath in s:typstMathList2
-        exe "syn match typstMathSymbol '\\\\(^\\\\|\\\\w\\\\|\\\\s\\\\|\\\\$\\\\)\\\\zs".typmath[0]."\\\\ze\\\\(\\\\w\\\\|\\\\s\\\\|$\\\\|\\\\$\\\\)' contained conceal cchar=".typmath[1]
+        exe "syn match typstMathSymbol '\\\\(\\\\<\\\\|^\\\\|\\\\w\\\\|\\\\s\\\\|\\\\$\\\\)\\\\zs".typmath[0]."\\\\ze\\\\(\\\\w\\\\|\\\\s\\\\|$\\\\|\\\\$\\\\)' contained conceal cchar=".typmath[1]
     endfor
           """)
 
 
-    # Scripts
+    # Fonts
     print("let s:typstCalList=[")
     for k, v in zip(LETTERS, CAL_LETTERS):
         print_one_line(k, v)
@@ -123,6 +123,47 @@ def main(args: argparse.Namespace):
         exe "syn match typstMathSymbol '\\\\(\\\\<\\\\|_\\\\)\\\\zsfbb(".typmath[0].")\\\\ze' contained conceal cchar=".typmath[1]
     endfor
           """)
+
+    print("""
+syntax region typstMathBold
+    \ matchgroup=typstMathFunction start=/\<fb(/ end=/)/
+    \ contains=@typstMath
+    \ contained concealends
+
+syntax region typstMathBold
+    \ matchgroup=typstMathFunction start=/\<bold(/ end=/)/
+    \ contains=@typstMath
+    \ contained concealends
+    
+highlight default link typstMathBold         typstMarkupBold
+    """)
+
+    # Simple super/subscripts
+    print("let s:typstSubList=[")
+    for k, v in zip(SUBSCRIPT_LETTERS, SUBSCRIPT_JOINEDS):
+        if k in '()':  # Temp workaround
+            continue
+        print_one_line(k, v)
+    print('\\ ]')
+        # exe "syn match typstMathScripts '\\\\(\\\\w\\\\|)\\\\)\\\\zs_".typmath[0]."\\\\ze' contained conceal cchar=".typmath[1]
+    print("""
+    for typmath in s:typstSubList
+        exe "syn match typstMathScripts '\\\\(\\\\w\\\\|)\\\\)\\\\@<=_".typmath[0]."' contained conceal cchar=".typmath[1]
+    endfor
+          """)
+    print("let s:typstSupList=[")
+    for k, v in zip(SUPERSCRIPT_LETTERS, SUPERSCRIPT_JOINEDS):
+        if k in '()':   # Temp workaround
+            continue
+        print_one_line(k, v)
+    print('\\ ]')
+    print("""
+    for typmath in s:typstSupList
+        exe "syn match typstMathScripts '\\\\(\\\\w\\\\|)\\\\)\\\\@<=\\\\^".typmath[0]."' contained conceal cchar=".typmath[1]
+    endfor
+          """)
+
+    # TODO Concealable multiple super/subscripts
 
 
 if __name__ == '__main__':
