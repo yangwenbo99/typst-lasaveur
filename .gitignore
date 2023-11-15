@@ -216,3 +216,4 @@ test.pdf
 typst-lasaveur.typ
 
 *.html
+typst.nvim
