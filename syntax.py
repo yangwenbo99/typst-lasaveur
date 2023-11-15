@@ -145,25 +145,25 @@ highlight default link typstMathBold         typstMarkupBold
             continue
         print_one_line(k, v)
     print('\\ ]')
-        # exe "syn match typstMathScripts '\\\\(\\\\w\\\\|)\\\\)\\\\zs_".typmath[0]."\\\\ze' contained conceal cchar=".typmath[1]
-    print("""
-    for typmath in s:typstSubList
-        exe "syn match typstMathScripts '\\\\(\\\\w\\\\|)\\\\)\\\\@<=_".typmath[0]."' contained conceal cchar=".typmath[1]
-    endfor
-          """)
+    # print("""
+    # for typmath in s:typstSubList
+        # exe "syn match typstMathScripts '\\\\(\\\\w\\\\|)\\\\)\\\\@<=_".typmath[0]."\\\\>' contained conceal cchar=".typmath[1]
+    # endfor
+          # """)
     print("let s:typstSupList=[")
     for k, v in zip(SUPERSCRIPT_LETTERS, SUPERSCRIPT_JOINEDS):
         if k in '()':   # Temp workaround
             continue
         print_one_line(k, v)
     print('\\ ]')
-    print("""
-    for typmath in s:typstSupList
-        exe "syn match typstMathScripts '\\\\(\\\\w\\\\|)\\\\)\\\\@<=\\\\^".typmath[0]."' contained conceal cchar=".typmath[1]
-    endfor
-          """)
+    # print("""
+    # for typmath in s:typstSupList
+        # exe "syn match typstMathScripts '\\\\(\\\\w\\\\|)\\\\)\\\\@<=\\\\^".typmath[0]."\\\\>' contained conceal cchar=".typmath[1]
+    # endfor
+          # """)
+    with open('syntax.vim', 'r') as f:
+        print(f.read())
 
-    # TODO Concealable multiple super/subscripts
 
 
 if __name__ == '__main__':
