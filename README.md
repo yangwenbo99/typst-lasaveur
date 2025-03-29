@@ -7,7 +7,7 @@ This is a Typst package for speedy mathematical input, inspired by [vim-latex](h
 Either use the file released in "Releases" or import using the following command:
 
 ```typst
-#import "@preview/lasaveur:0.1.3": *
+#import "@preview/lasaveur:0.1.4": *
 ```
 
 This script generates a Typst library that defines shorthand commands for various mathematical symbols and functions. Here's an overview of what it provides and how a user can use it:
@@ -46,3 +46,9 @@ The script provides a wide range of symbols covering most common mathematical no
 ## Accompanying Vim Syntax File
 
 The syntax file provides more advanced and correct concealing for both Typst's built-in math syntax and the lasaveur shorthands.  Download the syntax file from the "Releases" section and place it in your `~/.vim/after/syntax/` directory.  The `syntax.vim` file in the repo is supposed to be used by the generation script and it _will not work_ if directly sourced in Vim.
+
+## License
+
+Following the previous project (`vimtex-lasaveur`), this project is licensed under the [WTFPL (Limited-liability license)](https://github.com/yangwenbo99/vimtex-lasaveur/blob/main/LICENSE.txt).  Basically, this means you can do whatever you want with it, but you cannot hold me liable for anything. 
+
+However, to satisfy the requirement for the Typst package repository, all files of `typst-lasaveur` that are published in the Typst package repository are also licensed under the MIT license.

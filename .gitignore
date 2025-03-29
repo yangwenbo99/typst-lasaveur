@@ -216,4 +216,5 @@ test.pdf
 typst-lasaveur.typ
 
 *.html
-typst.nvim
+typst.vim
+typst-symbols.vim
