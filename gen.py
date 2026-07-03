@@ -11,7 +11,7 @@ FONT_FUNCTIONS = {
         'ca': 'cal',
         }
 MAGICS = {
-        '6': 'diff',
+        '6': 'partial',
         '8': 'infinity',
         '0': 'nothing', 
         'o': 'circle.stroked.tiny', 
@@ -28,8 +28,8 @@ MAGICS = {
         'peq': 'supset.eq', 
         'pne': 'supset.neq', 
         'pneq': 'supset.neq', 
-        'al': 'angle.l', 
-        'ar': 'angle.r', 
+        'al': 'chevron.l', 
+        'ar': 'chevron.r',
         'V': 'nabla', 
         'd': 'dot',
         'dd': 'dot.double',
@@ -76,7 +76,6 @@ GREEKS = {
         'W': 'Omega',
         }
 COMPATIBILITY = {
-        'partial': 'diff',
         'infty': 'infinity',
         'circ': 'circle.stroked.tiny',
         'setminus': 'without',
